@@ -1,111 +1,145 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent; // guarda as ações
+import java.awt.event.ActionListener; // ação 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class Login {
 
-public class Login{
+    public static void main(String[] args) {
 
-     public static void main(String[] args){
-    
-     // base || janela
+        // Criação da janela principal
+        JFrame frame = new JFrame("LOGIN <>");
+        frame.setSize(300, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    JFrame frame = new JFrame("LOGIN <>");
-    frame.setSize(200,300); //tam pixels
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fecha programa ao sair
-    
-    
+        // Painel principal com layout vertical
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(72,209,204));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-    // tela p componentes 
+        // Espaçamento superior
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-    JPanel panel = new JPanel();
-     panel.setBackground(Color.WHITE);
-     panel.setLayout(new BorderLayout());
+        // Campo de usuário
+        JLabel labelUsuario = new JLabel("Usuario");
+        labelUsuario.setForeground(Color.MAGENTA);
+        labelUsuario.setFont(new Font("Serif", Font.BOLD, 14));
+        labelUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    
-// Componentes <>
+        JTextField fieldUsuario = new JTextField("ex: usuario_xx");
+        fieldUsuario.setMaximumSize(new Dimension(200, 30));
+        fieldUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        panel.add(labelUsuario);
+        panel.add(fieldUsuario);
+
+        // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 15)));
+
+        // Campo de senha
+        JLabel labelSenha = new JLabel("Senha");
+        labelSenha.setForeground(Color.MAGENTA);
+        labelSenha.setFont(new Font("Serif", Font.BOLD, 14));
+        labelSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JTextField fieldSenha = new JTextField("ex: senha123@");
+        fieldSenha.setMaximumSize(new Dimension(200, 30));
+        fieldSenha.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        //botão para acesso 
-        JButton loginButton = new JButton ("Acess"); 
+          ImageIcon imagemOriginal = new ImageIcon("imagemcód.png");
+         Image imagemRedimensionada = imagemOriginal.getImage().getScaledInstance(1980, 1200, Image.SCALE_SMOOTH);
+         ImageIcon imagem = new ImageIcon(imagemRedimensionada);
+ 
+        JLabel imagemLabel = new JLabel(imagem);
+        imagemLabel.setHorizontalAlignment(JLabel.CENTER);
+        imagemLabel.setVerticalAlignment(JLabel.CENTER);
+        panel.add(imagemLabel, BorderLayout.CENTER);
 
-          loginButton.setBackground(Color.MAGENTA);//fundo
-          loginButton.setForeground(Color.PINK);//text
+        panel.add(labelSenha);
+        panel.add(fieldSenha);
 
-         JTextFieldPlaceholder campoTexto = new JTextFieldPlaceholder("ex: usuario_xx");
-             campoTexto.setColumns(20);//marca d'agua num campo de texto
-             campoTexto.setForeground(Color.GRAY);//cor texto
-         JTextField fieldUsuario = new JTextField(campoTexto);//campo de texto
+        // Espaçamento
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        // Botão de login
+        JButton loginButton = new JButton("Acessar");
+        loginButton.setBackground( new Color(0,206,209));
+        loginButton.setForeground(Color.MAGENTA);
+        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        loginButton.addActionListener(e -> {
+            String usuario = fieldUsuario.getText();
+            String senha = fieldSenha.getText();
+            JOptionPane.showMessageDialog(null, "Usuário: " + usuario + "\nSenha: " + senha, "Acesso Negado <...>", JOptionPane.INFORMATION_MESSAGE);
         
-       // Botão para cadastro
-        JButton loginButton2 = new JButton("register");
-          loginButton2.setBackground(Color.MAGENTA);//fundo
-          loginButton2.setForeground(Color.PINK);//text
-          
-           JTextFieldPlaceholder campoTexto2 = new JTextFieldPlaceholder("ex: senha123@");
-             campoTexto.setColumns(20);//marca d'agua num campo de texto
-             campoTexto.setForeground(Color.GRAY);//cor texto
-           JTextField fieldCadastro = new JTextField(campoTexto2);//campo de texto
-          
+        });
+
+        // Botão de registro
+        JButton registerButton = new JButton("Registrar");
+        registerButton.setBackground(Color.LIGHT_GRAY);
+        registerButton.setForeground(Color.MAGENTA);
+        registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Nova tela ao clicar em "Registrar"
+         registerButton.addActionListener(e -> {
+            JFrame cadastroFrame = new JFrame("Cadastro");
+            cadastroFrame.setSize(300, 200);
+            cadastroFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            cadastroFrame.setLocationRelativeTo(null);// local nulo (meio ou proximo)
+
+            JPanel cadastroPanel = new JPanel();
+            cadastroPanel.setLayout(new FlowLayout());
+            cadastroPanel.add(new JLabel("Tela de Cadastro<> ..."));
+            
+            JLabel labelCadastro = new JLabel("Usuario");
+           labelCadastro.setForeground(Color.MAGENTA);
+           labelCadastro.setFont(new Font("Serif", Font.BOLD, 14));
+           labelCadastro.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+            cadastroFrame.add(cadastroPanel);
+            cadastroFrame.setVisible(true);
+        });
+
+        // Adiciona botões ao painel
+        panel.add(loginButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)));
+        panel.add(registerButton);
+        panel.add(Box.createRigidArea(new Dimension(0, 20)));
 
 
-       // textos exibição
-       
-          JLabel labelUsario = new JLabel("usuário");
-             labelUsuario.setForeground(Color.MAGENTA);
-             labelUsuario.setFont(new Font("Serif", Font.BOLD, 11));//cuidado -- verificar espaçamento
-             labelUsuario.setHorizontalAlignment(JLabel.CENTER);
-         
-           JLabel labelSenha = new JLabel("senha");
-             labelSenha.setForeground(Color.MAGENTA);
-             labelSenha.setFont(new Font("Serif", Font.BOLD, 11));//cuidado -- verificar se possui espaçamento
-             labelSenha.setHorizontalAlignment(JLabel.CENTER);
 
-        
-
-/*
-        // Botão para alternar entre temas
-        JButton toggleButton = new JButton ("Tema Escuro");
-        panel.add(toggleButton, BorderLayout.SOUTH);
-        toggleButton.setForeground(Color.BLACK);
+        // Botão de alternância de tema
+        JButton toggleButton = new JButton("Escuro");
         toggleButton.setBackground(Color.LIGHT_GRAY);
+        toggleButton.setForeground(Color.MAGENTA);
+        toggleButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            // Adiciona um ActionListener ao botão
+        panel.add(toggleButton);
+
+        // Lógica de alternância de tema
         toggleButton.addActionListener(new ActionListener() {
-          private boolean isDarkTheme = false; // Variável para rastrear o tema atual
+            private boolean isDarkTheme = false;
 
-            @Override
+            @Override //modificando <>
             public void actionPerformed(ActionEvent e) {
                 if (isDarkTheme) {
-
-                    // Muda para tema claro
-                    panel.setBackground(Color.WHITE);//painel branco
-                    toggleButton.setForeground(Color.BLACK);//texto preto
-                    toggleButton.setBackground(Color.LIGHT_GRAY);//cor do botão cinza
-                    toggleButton.setText("Tema Escuro");
-
-                    } else {
-
-                    // Muda para tema escuro
-                    panel.setBackground(Color.DARK_GRAY);//painel
-                    toggleButton.setForeground(Color.WHITE);//texto
-                    toggleButton.setBackground(Color.GRAY);//cor do butão
-                    toggleButton.setText("Tema Claro");
+                    panel.setBackground(new Color(0,191,255));
+                    toggleButton.setForeground(Color.MAGENTA);
+                    toggleButton.setBackground(new Color(0,191,255));
+                    toggleButton.setText("Escuro");
+                } else {
+                    panel.setBackground(new Color(0,0,205));
+                    toggleButton.setForeground(Color.WHITE);
+                    toggleButton.setBackground(new Color(64,224,208));
+                    toggleButton.setText("Claro");
                 }
-                isDarkTheme = !isDarkTheme; // Alterna o estado do tema
+                isDarkTheme = !isDarkTheme;
             }
         });
 
-*/
-
-         panel.add(fieldUsuario);
-         panel.add(loginButton);
-         panel.add(loginButton2);
-
-        
-         frame.setLocationRelativeTo(null);
-         frame.add(panel); 
-    
-         frame.setVisible(true);
-
+        // Adiciona o painel à janela
+        frame.add(panel);
+        frame.setLocationRelativeTo(null); // Centraliza na tela
+        frame.setVisible(true);
     }
 }

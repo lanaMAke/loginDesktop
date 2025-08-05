@@ -59,11 +59,24 @@ public class Login2 {
         loginButton.setBackground(Color.LIGHT_GRAY);
         loginButton.setForeground(Color.BLACK);
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        loginButton.addActionListener(e -> {
+            JOptionPane.showMenssageDialog(null, textField.getText(), "Acesso Negado <...>",JOptionPane.INFORMATION_MENSSAGE);
+        })
+
 
         JButton registerButton = new JButton("Registrar");
         registerButton.setBackground(Color.LIGHT_GRAY);
         registerButton.setForeground(Color.BLACK);
         registerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        // nova tela atraves do botão;
+       /* public class Cadastro extends */
+       registerButton.addActionListener(e -> {
+            JOptionPane.showMenssageDialog(null, textField.getText(), " <...>",JOptionPane.INFORMATION_MENSSAGE);
+        })
+
+        
 
         panel.add(loginButton);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));// pesquisar
